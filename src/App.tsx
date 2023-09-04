@@ -23,8 +23,8 @@ const App = () => {
       <NavBar />
     
   </GridItem>
-  <GridItem pl='2' bg='blue.300' area={'nav'}>
-   App
+  <GridItem area={'nav'}>
+   <Genres />
   </GridItem>
   <GridItem pl='2' bg='green.300' area={'main'}>
     Main

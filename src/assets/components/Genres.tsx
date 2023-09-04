@@ -18,7 +18,7 @@ const Genres = () => {
     
     <List>
         {books.map( book =>  
-        <ListItem  key={book.id} paddingY='14px'>
+        <ListItem  key={book.id} paddingY='2px'>
           <HStack  >
            
             <Button whiteSpace='normal' textAlign='left'   fontSize='lg' variant='link'>{book.name}</Button>
