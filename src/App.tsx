@@ -1,7 +1,8 @@
 import { Button, Grid, GridItem, HStack } from '@chakra-ui/react'
 import React from 'react'
-import ToggleButton from './assets/components/ToggleButton'
+
 import NavBar from './assets/components/NavBar'
+import Genres from './assets/components/Genres'
 
 const App = () => {
   return (
@@ -22,8 +23,8 @@ const App = () => {
       <NavBar />
     
   </GridItem>
-  <GridItem pl='2' bg='pink.300' area={'nav'}>
-    Nav
+  <GridItem pl='2' bg='blue.300' area={'nav'}>
+   App
   </GridItem>
   <GridItem pl='2' bg='green.300' area={'main'}>
     Main
