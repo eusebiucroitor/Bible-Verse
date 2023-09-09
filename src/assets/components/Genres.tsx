@@ -14,14 +14,14 @@ const Genres = () => {
 
   return (
     <>
-    <Heading fontSize='2xl' marginBottom={3}>Genres</Heading>
+    <Heading fontSize='2xl' marginBottom={3}></Heading>
     
     <List>
         {books.map( book =>  
         <ListItem  key={book.id} paddingY='2px'>
           <HStack  >
            
-            <Button whiteSpace='normal' textAlign='left'   fontSize='lg' variant='link'>{book.name}</Button>
+            <Button whiteSpace='normal' textAlign='left'   fontSize='lg' variant='link' padding={2} color='blackAlpha.800'>{book.name}</Button>
           </HStack>
           </ListItem> )}
     </List>

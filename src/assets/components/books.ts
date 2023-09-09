@@ -20,7 +20,7 @@ export default[
     }, 
     {
        "id": 5,
-       "name": "Deutoronomul",  
+       "name": "Deuteronomul",  
     }, 
     {
        "id": 6,
