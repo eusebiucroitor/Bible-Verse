@@ -21,7 +21,7 @@ const Genres = () => {
         <ListItem  key={book.id} paddingY='2px'>
           <HStack  >
            
-            <Button whiteSpace='normal' textAlign='left'   fontSize='lg' variant='link' padding={2} color='blackAlpha.800'>{book.name}</Button>
+            <Button whiteSpace='normal' textAlign='left'   fontSize='lg' variant='link' padding={2} >{book.name}</Button>
           </HStack>
           </ListItem> )}
     </List>
