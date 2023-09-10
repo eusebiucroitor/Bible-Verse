@@ -11,7 +11,7 @@ const SearchImput = () => {
         
         <InputGroup>
         <InputLeftElement children={<BsSearch /> }/>
-        <Input borderRadius={20} placeholder='Bible Verse...' variant='filled'></Input>
+        <Input borderRadius={20} placeholder='Search a Bible Verse...' variant='filled'></Input>
         </InputGroup>
         
     </form>  

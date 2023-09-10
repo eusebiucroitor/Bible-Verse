@@ -177,7 +177,7 @@ export default[
     }, 
     {
        "id": 44,
-       "name": "faptele Apostolilor",  
+       "name": "Faptele Apostolilor",  
     }, 
     {
        "id": 45,

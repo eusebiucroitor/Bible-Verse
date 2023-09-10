@@ -3,6 +3,7 @@ import React from 'react'
 
 import NavBar from './assets/components/NavBar'
 import Genres from './assets/components/Genres'
+import FormAdd from './assets/components/FormAdd'
 
 const App = () => {
   return (
@@ -26,8 +27,8 @@ const App = () => {
   <GridItem area={'nav'}>
    <Genres />
   </GridItem>
-  <GridItem pl='2' bg='green.300' area={'main'}>
-    Main
+  <GridItem pl='2' bg='' area={'main'}>
+    <FormAdd />
   </GridItem>
 </Grid>
     

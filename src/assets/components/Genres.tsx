@@ -14,9 +14,16 @@ const Genres = () => {
 
   return (
     <>
-    <Heading fontSize='2xl' marginBottom={3}></Heading>
-    
-    <List>
+     
+   
+<nav className="navbar ">
+  <div className="container-fluid">
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+<List className='collapse' id="navbarToggleExternalContent" >
         {books.map( book =>  
         <ListItem  key={book.id} paddingY='2px'>
           <HStack  >
@@ -25,8 +32,8 @@ const Genres = () => {
           </HStack>
           </ListItem> )}
     </List>
-   
-    </>
+    
+      </>
   )}
   
 
