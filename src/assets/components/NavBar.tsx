@@ -4,6 +4,7 @@ import bibleIcon from '../image/bibleIcon.ico'
 import ToggleButton from './ToggleButton'
 import SearchImput from './SearchInput'
 import Genres from './Genres'
+import ExternalContent from './ExternalContent'
     
 
 
@@ -11,7 +12,7 @@ const NavBar = () => {
   return (
     <>
     <HStack justifyContent='space-between' padding={2} >
-   
+   <ExternalContent />
    <SearchImput  />
     <ToggleButton />  
    </HStack>
