@@ -8,7 +8,7 @@ const ToggleButton = () => {
   return (
     <HStack >
          <Switch colorScheme= 'blue'   isChecked={colorMode=== 'dark' } onChange={toggleColorMode}/>
-        <Text whiteSpace='nowrap' >Dark Mode</Text>
+        <Text whiteSpace='nowrap' marginBottom={2} >Dark Mode</Text>
    </HStack>
   )
 }

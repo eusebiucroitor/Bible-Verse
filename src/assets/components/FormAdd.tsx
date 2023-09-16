@@ -2,6 +2,7 @@ import { Button, ButtonGroup, Input, InputGroup, TagLabel } from '@chakra-ui/rea
 import { SyntheticEvent, useState,} from 'react'
 
 
+
 const FormAdd = () => {
  const [bibleVers,setBibleVers]= useState('');
  const [books,setBooks]= useState('');
@@ -9,11 +10,21 @@ const FormAdd = () => {
  const [verse,setVerse]= useState('');
  const [personName,setPersonName]= useState('');
  const [data,setData]= useState('');
+ 
 
  const handleSubmit= (e:SyntheticEvent) => {
     e.preventDefault()
     const book={bibleVers,books,chapter,verse,personName,data}
-    console.log(book)
+    
+    fetch('http://localhost:7002/BIBLE',{
+      method:'POST',
+      headers:{"Content-Type": "application/json"},
+      body: JSON.stringify(book)
+    }).then(()=> {
+      console.log('added')
+    })
+
+    
  }
 
   
@@ -21,7 +32,7 @@ const FormAdd = () => {
   
   return (
     <>
-    <form onSubmit={handleSubmit}  >
+    <form onSubmit={handleSubmit}   >
         
         
         <Input borderRadius={20} placeholder='Introduce a Bible Verse...' variant='filled' marginY={5} style={{width:'91%' }} value={bibleVers} onChange={(e)=>setBibleVers(e.target.value)}   ></Input>
@@ -38,8 +49,8 @@ const FormAdd = () => {
         </InputGroup>
         
         
-        <div style={{ display: 'flex', justifyContent: 'center',marginRight: '9%', }}>
-        <button className="button button2" >Save</button>
+        <div style={{ display: 'flex', justifyContent: 'center', marginRight: '9%', }}>
+        <button className="button button2"  >Save</button>
             </div>    
             
        
