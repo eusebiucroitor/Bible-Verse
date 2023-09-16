@@ -3,8 +3,15 @@ import NavBar from './assets/components/NavBar'
 import Genres from './assets/components/Genres'
 import FormAdd from './assets/components/FormAdd'
 import { useState } from 'react'
+import FormSave from './assets/components/FormSave'
+import books from './assets/components/books'
 
 const App = () => {
+  const [books,setBooks ] = useState([{
+    id:1,bibleVers:'Pampam', bibleBook: 'geneza' ,chapter: 3, verse: 4 , name:'sebi',data: '12.12.2022'
+  }]
+  )
+  
   
 
   return (
@@ -32,6 +39,7 @@ const App = () => {
   
   <GridItem pl='2' bg='' area={'main'} >
     <FormAdd />
+    <FormSave books={books} onDelete={(id)=>setBooks(books.filter((e)=>e.id !== id))} />
   </GridItem>
   
 </Grid>
