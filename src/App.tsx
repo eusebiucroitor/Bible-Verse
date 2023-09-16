@@ -8,9 +8,8 @@ import books from './assets/components/books'
 
 const App = () => {
   const [books,setBooks ] = useState([{
-    id:1,bibleVers:'Pampam', bibleBook: 'geneza' ,chapter: 3, verse: 4 , name:'sebi',data: '12.12.2022'
-  }]
-  )
+    id:1, bibleVerse:"Fiindcă atât de mult a iubit Dumnezeu lumea, că a dat pe singurul Lui Fiu, pentru ca oricine crede în El, să nu piară, ci să aibă viața veșnică", bibleBook:'Ioan', chapter:3, verse:16,name:'Eusebiu', data:'16.09.2023'
+  }])
   
   
 
@@ -38,7 +37,7 @@ const App = () => {
   </GridItem>
   
   <GridItem pl='2' bg='' area={'main'} >
-    <FormAdd />
+    <FormAdd onSubmit={book=>setBooks([...books,{...book,id:books.length+1}])}/>
     <FormSave books={books} onDelete={(id)=>setBooks(books.filter((e)=>e.id !== id))} />
   </GridItem>
   

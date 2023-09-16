@@ -1,7 +1,7 @@
 import React from 'react'
 interface Book{
     id:number;
-    bibleVers: string;
+    bibleVerse: string;
     bibleBook:string;
     chapter:number;
     verse:number;
@@ -21,7 +21,7 @@ const FormSave = ({books,onDelete}:Props) => {
       <table className="table table-border">
         <thead>
             <tr>
-                <th>Bible Vers</th>
+                <th>Bible Verse</th>
                 <th>Bible Book</th>
                 <th>Chapter</th>
                 <th>Vers</th>
@@ -32,8 +32,8 @@ const FormSave = ({books,onDelete}:Props) => {
         </thead>
         <tbody>
             {books.map(book => <tr key= {book.id}>
+                <td>{book.bibleVerse}</td>
                 <td>{book.bibleBook}</td>
-                <td>{book.bibleVers}</td>
                 <td>{book.chapter}</td>
                 <td>{book.verse}</td>
                 <td>{book.name}</td>
