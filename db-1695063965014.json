@@ -53,32 +53,6 @@
       "personName": "sebi",
       "data": "2222-02-22",
       "id": 6
-    },
-    {
-      "_def": {
-        "unknownKeys": "strip",
-        "catchall": {
-          "_def": {
-            "typeName": "ZodNever"
-          }
-        },
-        "typeName": "ZodObject"
-      },
-      "_cached": null,
-      "id": 7
-    },
-    {
-      "_def": {
-        "unknownKeys": "strip",
-        "catchall": {
-          "_def": {
-            "typeName": "ZodNever"
-          }
-        },
-        "typeName": "ZodObject"
-      },
-      "_cached": null,
-      "id": 8
     }
   ]
 }

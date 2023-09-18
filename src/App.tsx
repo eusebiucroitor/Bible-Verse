@@ -2,19 +2,17 @@ import { Button, Container, Grid, GridItem, HStack } from '@chakra-ui/react'
 import NavBar from './assets/components/NavBar'
 import Genres from './assets/components/Genres'
 import FormAdd from './assets/components/FormAdd'
-import { useState } from 'react'
+import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useState } from 'react'
 import FormSave from './assets/components/FormSave'
-import books from './assets/components/books'
+import Data from '../data/db.json'
 
 const App = () => {
   const [books,setBooks ] = useState([{
     id:1, bibleVerse:"Fiindcă atât de mult a iubit Dumnezeu lumea, că a dat pe singurul Lui Fiu, pentru ca oricine crede în El, să nu piară, ci să aibă viața veșnică", bibleBook:'Ioan', chapter:3, verse:16,name:'Eusebiu', data:'16.09.2023'
   }])
-  
-  
-
   return (
     <>
+    
     <Grid
   templateAreas={`"header header"
                   "nav main"
