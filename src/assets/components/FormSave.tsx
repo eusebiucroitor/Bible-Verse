@@ -1,4 +1,4 @@
-import React from 'react'
+
 interface Book{
     id:number;
     bibleVerse: string;
@@ -6,7 +6,7 @@ interface Book{
     chapter:number;
     verse:number;
     name:string;
-    data:string;
+    date:string;
 }
 
 interface Props{
@@ -26,7 +26,7 @@ const FormSave = ({books,onDelete}:Props) => {
                 <th>Chapter</th>
                 <th>Vers</th>
                 <th>Name</th>
-                <th>Data</th>
+                <th>Date</th>
                 <th></th>
             </tr>
         </thead>
@@ -37,7 +37,7 @@ const FormSave = ({books,onDelete}:Props) => {
                 <td>{book.chapter}</td>
                 <td>{book.verse}</td>
                 <td>{book.name}</td>
-                <td>{book.data}</td>
+                <td>{book.date}</td>
                 <td>
                     <button className="btn btn-outline-danger" onClick={()=>onDelete(book.id)}>Delete</button>
                 </td>

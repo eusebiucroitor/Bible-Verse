@@ -8,7 +8,7 @@ import Data from '../data/db.json'
 
 const App = () => {
   const [books,setBooks ] = useState([{
-    id:1, bibleVerse:"Fiindcă atât de mult a iubit Dumnezeu lumea, că a dat pe singurul Lui Fiu, pentru ca oricine crede în El, să nu piară, ci să aibă viața veșnică", bibleBook:'Ioan', chapter:3, verse:16,name:'Eusebiu', data:'16.09.2023'
+    id:1, bibleVerse:"Fiindcă atât de mult a iubit Dumnezeu lumea, că a dat pe singurul Lui Fiu, pentru ca oricine crede în El, să nu piară, ci să aibă viața veșnică", bibleBook:'Ioan', chapter:3, verse:16,name:'Eusebiu', date:'16-09-2023'
   }])
   return (
     <>
