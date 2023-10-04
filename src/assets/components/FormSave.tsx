@@ -1,3 +1,4 @@
+import { Box} from "@chakra-ui/react";
 
 interface Book{
     id:number;
@@ -17,10 +18,11 @@ interface Props{
 const FormSave = ({books,onDelete}:Props) => {
     if(books.length===0) return null;
   return (
-    <div>
-      <table className="table table-border">
-        <thead>
-            <tr>
+    <div >
+      <Box >
+      <table className="table table-border" >
+        <thead >
+            <tr >
                 <th>Bible Verse</th>
                 <th>Bible Book</th>
                 <th>Chapter</th>
@@ -44,6 +46,7 @@ const FormSave = ({books,onDelete}:Props) => {
             </tr>)}
         </tbody>
       </table>
+      </Box>
     </div>
   )
 }

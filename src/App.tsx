@@ -1,10 +1,10 @@
-import { Button, Container, Grid, GridItem, HStack } from '@chakra-ui/react'
+import {  Grid, GridItem, HStack } from '@chakra-ui/react'
 import NavBar from './assets/components/NavBar'
 import Genres from './assets/components/Genres'
 import FormAdd from './assets/components/FormAdd'
-import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useState } from 'react'
+import {  useState } from 'react'
 import FormSave from './assets/components/FormSave'
-import Data from '../data/db.json'
+
 
 const App = () => {
   const [books,setBooks ] = useState([{

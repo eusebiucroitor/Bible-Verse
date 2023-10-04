@@ -27,6 +27,10 @@ const FormAdd = ({onSubmit}:Props) => {
  const { register,handleSubmit,formState:{errors}} = useForm<FormAddData>({resolver:zodResolver(schema)})
  
   
+  function moment(value: any, arg1: string) {
+    throw new Error('Function not implemented.');
+  }
+
   return (
     <>
     <form onSubmit={handleSubmit(onSubmit)}   >
@@ -47,7 +51,7 @@ const FormAdd = ({onSubmit}:Props) => {
         <InputGroup marginY={5} >
           <Input {...register('name')}  borderRadius={20} placeholder='Introduce Your Name...'style={{width:'45%' }} ></Input>
           {errors.name && <p className='text-danger'>{errors.name.message}</p>}
-          <Input {...register('date')}  borderRadius={20} type="date" name="date"  style={{width:'46%' }}   />
+          <Input {...register('date')}  borderRadius={20} type="date" name='date' style={{width:'46%' }}    />
           {errors.date && <p className='text-danger'>{errors.date.message}</p>}
         </InputGroup>
         
