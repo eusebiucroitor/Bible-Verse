@@ -1,25 +1,30 @@
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
-import {  useRef } from 'react'
+import { useState } from 'react';
 import {BsSearch} from 'react-icons/bs'
 
 
 
-const SearchImput = () => {
-    const ref = useRef<HTMLInputElement>(null)
-  
-   
-  return (
+const SearchInput=() =>{
+ return(
     <>
-    <form style={{width: '100%'}}>
+    <form  style={{width: '100%'}} >
         
         <InputGroup>
         <InputLeftElement children={<BsSearch /> }/>
-        <Input borderRadius={20} placeholder='Search a Bible Verse...' variant='filled' ></Input>
+        <Input
+         borderRadius={20}
+          placeholder='Search Bar....' 
+          variant='filled' 
+          type="text"
+         
+          />
+            
         </InputGroup>
-        
+        <button type="submit" className='btn btn-primary'>Search</button>
     </form>  
     </>
   )
 }
 
-export default SearchImput
+
+export default SearchInput

@@ -1,9 +1,6 @@
-import { HStack, Image, Text } from '@chakra-ui/react'
-import React from 'react'
-import bibleIcon from '../image/bibleIcon.ico'
+import { HStack } from '@chakra-ui/react'
 import ToggleButton from './ToggleButton'
-import SearchImput from './SearchInput'
-import Genres from './Genres'
+import SearchInput from './SearchInput'
 import ExternalContent from './ExternalContent'
     
 
@@ -13,7 +10,6 @@ const NavBar = () => {
     <>
     <HStack justifyContent='space-between' padding={2} >
    <ExternalContent />
-   <SearchImput  />
     <ToggleButton />  
    </HStack>
    </>
