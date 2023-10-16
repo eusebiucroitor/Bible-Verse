@@ -6,6 +6,7 @@ import ExternalContent from './ExternalContent'
 
 
 const NavBar = () => {
+  
   return (
     <>
     <HStack justifyContent='space-between' padding={2} >

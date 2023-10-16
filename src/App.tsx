@@ -1,8 +1,28 @@
 import {  Grid, GridItem } from '@chakra-ui/react'
 import NavBar from './assets/components/NavBar'
 import Genres from './assets/components/Genres'
-
 import NewFormAdd from './assets/components/NewFormAdd'
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDuhbD_oEbQi4iWNeaBdc8U4G3gbcn9mhk",
+  authDomain: "bible-fc3f8.firebaseapp.com",
+  projectId: "bible-fc3f8",
+  storageBucket: "bible-fc3f8.appspot.com",
+  messagingSenderId: "39725012311",
+  appId: "1:39725012311:web:e70e909757e69c174bda12",
+  measurementId: "G-JDW8BNJ766"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 
 

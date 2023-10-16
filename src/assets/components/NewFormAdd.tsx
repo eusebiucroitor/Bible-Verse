@@ -1,6 +1,5 @@
 import {  Box, Input, InputGroup,  } from '@chakra-ui/react'
-import { SetStateAction, useEffect, useState } from 'react';
-import SearchBar from './SearchInput';
+import { useEffect, useState } from 'react';
 import SearchInput from './SearchInput';
 
 const NewFormAdd = () => {
@@ -16,6 +15,7 @@ const NewFormAdd = () => {
   }, [{bibleVers}])
 
   const [showTable, setShowTable] = useState<boolean>(false);
+  const [hideTable, setHideTable] = useState<boolean>(false);
 
   const handleBibleVersChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBibleVers(event.target.value);
@@ -39,10 +39,10 @@ const NewFormAdd = () => {
       }
   };
   const handleVerseChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const chapter = event.target.value;
+    const value = event.target.value;
     // Ensure that the input value is a valid number or an empty string
-    if (/^\d*$/.test(chapter) || chapter === '') {
-      setVerse(chapter === '' ? '' : parseInt(chapter, 10));
+    if (/^\d*$/.test(value) || value === '') {
+      setVerse(value === '' ? '' : parseInt(value, 10));
     }
   };
   const [savedData, setSavedData] = useState<Array<{ bibleVers: string; bibleBook: string; name: string; chapter: any; verse: any }>>([]);
@@ -58,6 +58,7 @@ const NewFormAdd = () => {
     setVerse('');
     e.preventDefault();
     setShowTable(true);
+    
   };
   const handleDeleteClick = (index: number) => {
     const updatedData = [...savedData];
@@ -71,33 +72,48 @@ const NewFormAdd = () => {
   const [filteredData, setFilteredData] = useState<
     Array<{ bibleVers: string; bibleBook: string; name: string; chapter: any; verse: any }>
   >([]);
+
+  // Handler to handle search submission
   const handleSearchSubmit = () => {
     // Filter the data based on the searchQuery
+   
     const filtered = savedData.filter((data) =>
       data.bibleVers.toLowerCase().includes(searchQuery.toLowerCase()) ||
       data.bibleBook.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      data.name.toString().includes(searchQuery)
+      data.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      data.chapter.toString().includes(searchQuery) ||
+      data.verse.toString().includes(searchQuery)
     );
+    
     // Update the filtered data state
     setFilteredData(filtered);
+    setHideTable(true)
+    setShowTable(false)
+    
+    setShowTable(filtered.length > 0);
+    setSearchQuery('');
   };
-  const [searchInput, setSearchInput] = useState("");
-  const handleChange = (e: { preventDefault: () => void; target: { value: SetStateAction<string>; }; }) => {
-    e.preventDefault();
-    setSearchInput(e.target.value);
+  const handleDeleteItem = (index: number) => {
+    const updatedData = [...savedData];
+    updatedData.splice(index, 1);
+    setSavedData(updatedData);
+  
+    // Remove the deleted item from filteredData if it exists
+    const filteredCopy = [...filteredData];
+    const deletedItem = filteredCopy.find((item) => savedData.indexOf(item) === index);
+    if (deletedItem) {
+      const deletedIndex = filteredCopy.indexOf(deletedItem);
+      filteredCopy.splice(deletedIndex, 1);
+      setFilteredData(filteredCopy);
+    }
+    
   };
-  
-  if (searchInput.length > 0) {
-      savedData.filter((book) => {
-      return book.name.match(searchInput);
-  });
-  }
-  
- 
   return (
+    
     <div>
+      <div>
          
-        <div>
+        
     <form  >
         <Input  
         borderRadius={20}
@@ -145,21 +161,16 @@ const NewFormAdd = () => {
                onChange={handleNameChange} />
           
         </InputGroup>
-        
-        
         <div style={{ display: 'flex', justifyContent: 'center', marginRight: '9%' }}>
         <button className="button button2" onClick={handleSaveClick}  >Save</button>
-        
-        </div>   
-                  
+        </div>         
     </form>     
     </div>
-   
-    
-    <SearchBar  />
-      
-      
-    {showTable && (
+    <InputGroup>
+        <SearchInput   searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        onSearchSubmit={handleSearchSubmit}/></InputGroup>     
+      {showTable && filteredData.length === 0 &&  (  
     <table   className="length">
         <thead >
           <tr>
@@ -187,9 +198,54 @@ const NewFormAdd = () => {
           ))}
         </tbody>
       </table>
+       
+   
+        )}
+    {hideTable && filteredData.length != 0 &&  (
+        <div>
+          <h2>Search Results</h2>
+          {savedData.length > 0 ? (
+           <table   className="length">
+           <thead >
+             <tr>
+               <th>Bible Vers</th>
+               <th>Bible Book</th>
+               <th>Chapter</th>
+               <th >Vers</th>
+               <th>Name of the person</th>
+               <th></th>
+             </tr>
+           </thead>
+           
+           <tbody>
+             {filteredData.map((data, index) => (
+               <tr key={index}>
+                 <td>{data.bibleVers}</td>
+                 <td>{data.bibleBook}</td>
+                 <td>{data.chapter}</td>
+                 <td>{data.verse}</td>
+                 <td>{data.name}</td>
+                 <td>
+                   <button onClick={() => handleDeleteItem(savedData.indexOf(data) )} className="btn btn-outline-danger" >Delete</button>
+                 </td>
+               </tr>
+             
+             ))}
+             
+             
+           </tbody>
+         </table>
+          )  :  (
+            <p>No matching results found.</p>
+          )}
+        
+        </div>
+        
+
     )}
-      
+    
     </div>
+    
 
     
     
