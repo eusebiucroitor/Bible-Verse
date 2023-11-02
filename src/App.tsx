@@ -1,4 +1,4 @@
-import {  Grid, GridItem } from '@chakra-ui/react'
+import {  ChakraProvider, ColorModeScript, Grid, GridItem, extendTheme } from '@chakra-ui/react'
 import NavBar from './assets/components/NavBar'
 import Genres from './assets/components/Genres'
 import NewFormAdd from './assets/components/NewFormAdd'
@@ -27,13 +27,14 @@ import NewFormAdd from './assets/components/NewFormAdd'
   <GridItem area={'nav'} bg='' >
    <Genres  />
   </GridItem>
-  
+ 
   <GridItem pl='2' bg='' area={'main'} >
    <NewFormAdd  /> 
   </GridItem>
   
+  
 </Grid>
-    
+
     </>
   )
 }

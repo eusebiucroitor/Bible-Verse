@@ -1,4 +1,4 @@
-import {  Box, Input, InputGroup,  } from '@chakra-ui/react'
+import {  Box, Input, InputGroup, useColorMode,  } from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
 import SearchInput from './SearchInput';
 import {db} from "./firebase"
@@ -124,7 +124,6 @@ const NewFormAdd = () => {
   };
   
   
-  
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   // State to hold the filtered data
@@ -154,9 +153,9 @@ const NewFormAdd = () => {
   };
   const [showSearchTable, setShowSearchTable] = useState<boolean>(false);
   const handleDeleteItem = (index: number) => {
-    const updatedData = [...fetchedData];
+    const updatedData = [...savedData];
     updatedData.splice(index, 1);
-    setFetchedData(updatedData);
+    setSavedData(updatedData);
     
   
     // Remove the deleted item from filteredData if it exists
@@ -169,8 +168,13 @@ const NewFormAdd = () => {
     }
     
   };
+  const handleDarkModeToggle = () => {
+    toggleColorMode();
+  };
+  const { colorMode, toggleColorMode } = useColorMode();
   
   return (
+    <Box color={colorMode === 'dark' ? 'white' : 'black'}>
     
     
     <div>
@@ -281,7 +285,7 @@ const NewFormAdd = () => {
         )}
     {hideTable  && filteredData.length != 0  &&   (
         <div>
-          {fetchedData.length > 0 || savedData.length>0? (
+          { fetchedData.length>0? (
             <div>
           <h2>Search Results</h2>
           
@@ -328,6 +332,7 @@ const NewFormAdd = () => {
     
     
     </div> 
+    </Box>
   )
   
 }
