@@ -1,6 +1,17 @@
 import {  Box, Input, InputGroup,  } from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
 import SearchInput from './SearchInput';
+import {db} from "./firebase"
+import { string } from 'zod';
+import firebase from 'firebase/compat';
+
+interface BibleData {
+  bibleVers: string;
+  bibleBook: string;
+  name: string;
+  chapter: any;
+  verse: any;
+}
 
 const NewFormAdd = () => {
   const [bibleVers, setBibleVers] = useState<string>('');
@@ -8,10 +19,14 @@ const NewFormAdd = () => {
   const [name, setName] = useState<string>('');
   const [chapter, setChapter] = useState<number | ''>('');
   const [verse, setVerse] = useState<number | ''>('');
+  
+  
+  
 
   
   useEffect(() => {
     localStorage.setItem('book', JSON.stringify({bibleVers,bibleBook,name,chapter,verse}))
+    
   }, [{bibleVers}])
 
   const [showTable, setShowTable] = useState<boolean>(false);
@@ -48,6 +63,19 @@ const NewFormAdd = () => {
   const [savedData, setSavedData] = useState<Array<{ bibleVers: string; bibleBook: string; name: string; chapter: any; verse: any }>>([]);
 
   const handleSaveClick = (e: { preventDefault: () => void; }) => {
+    const newData: BibleData = { bibleVers, bibleBook, name, chapter, verse };
+    const dataRef = db.ref('/bibleVerses'); // Replace 'your-database-path' with your desired path
+
+    // Push the new data to the database
+    dataRef.push(newData)
+      .then(() => {
+        // Data saved successfully
+        console.log('Data saved successfully.');
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error('Error saving data:', error);
+      });
     // Save the input values to the savedData state
     setSavedData([...savedData, { bibleVers, bibleBook,name, chapter ,verse }]);
     // Clear the input fields
@@ -58,13 +86,44 @@ const NewFormAdd = () => {
     setVerse('');
     e.preventDefault();
     setShowTable(true);
-    
   };
+  const [data, setData] = useState({}); // Your form data state
+
+ 
+  const [fetchedData, setFetchedData] = useState<BibleData[]>([]);
+
+  useEffect(() => {
+    const dataRef = db.ref('/bibleVerses');
+
+    dataRef.on('value', (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const dataArray: BibleData[] = Object.values(data) as BibleData[];
+        setFetchedData(dataArray);
+      }
+    });
+  }, []);
+
+
   const handleDeleteClick = (index: number) => {
-    const updatedData = [...savedData];
-    updatedData.splice(index, 1);
-    setSavedData(updatedData);
+   
+    const newData = [...fetchedData];
+    const dataToDelete = newData[index];
+
+    const dataRef = db.ref('/bibleVerses');
+
+    // Find the data in Firebase and delete it based on a unique identifier (for example, ID or specific key)
+    dataRef.orderByChild('bibleVers').equalTo(dataToDelete.bibleVers).once('value', (snapshot) => {
+      snapshot.forEach((child) => {
+        child.ref.remove();
+      });
+    });
+
+    newData.splice(index, 1);
+    setFetchedData(newData);
   };
+  
+  
   
   const [searchQuery, setSearchQuery] = useState<string>('');
 
@@ -88,15 +147,17 @@ const NewFormAdd = () => {
     // Update the filtered data state
     setFilteredData(filtered);
     setHideTable(true)
-    setShowTable(false)
+    setShowTable(true)
     
-    setShowTable(filtered.length > 0);
+    setShowSearchTable(filtered.length > 0);
     setSearchQuery('');
   };
+  const [showSearchTable, setShowSearchTable] = useState<boolean>(false);
   const handleDeleteItem = (index: number) => {
     const updatedData = [...savedData];
     updatedData.splice(index, 1);
     setSavedData(updatedData);
+    
   
     // Remove the deleted item from filteredData if it exists
     const filteredCopy = [...filteredData];
@@ -108,7 +169,9 @@ const NewFormAdd = () => {
     }
     
   };
+  
   return (
+    
     
     <div>
       <div>
@@ -166,11 +229,17 @@ const NewFormAdd = () => {
         </div>         
     </form>     
     </div>
-    <InputGroup>
+    
         <SearchInput   searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
-        onSearchSubmit={handleSearchSubmit}/></InputGroup>     
-      {showTable && filteredData.length === 0 &&  (  
+        onSearchSubmit={handleSearchSubmit}
+        
+        />     
+      {filteredData.length === 0 && ( 
+           <div>
+       {fetchedData.length > 0 ? (  
+        <div>
+        <h4>Bible Form</h4>   
     <table   className="length">
         <thead >
           <tr>
@@ -184,7 +253,7 @@ const NewFormAdd = () => {
         </thead>
         
         <tbody>
-          {savedData.map((data, index) => (
+          {fetchedData.map((data, index) => (
             <tr key={index}>
               <td>{data.bibleVers}</td>
               <td>{data.bibleBook}</td>
@@ -198,13 +267,25 @@ const NewFormAdd = () => {
           ))}
         </tbody>
       </table>
-       
-   
+      </div>
+         ) : (
+        
+          <p></p>
+          
         )}
-    {hideTable && filteredData.length != 0 &&  (
+      </div>
+      
+      
+      
+      
+        )}
+    {hideTable  && filteredData.length != 0  &&   (
         <div>
+          {savedData.length > 0? (
+            <div>
           <h2>Search Results</h2>
-          {savedData.length > 0 ? (
+          
+          
            <table   className="length">
            <thead >
              <tr>
@@ -235,6 +316,7 @@ const NewFormAdd = () => {
              
            </tbody>
          </table>
+         </div>
           )  :  (
             <p>No matching results found.</p>
           )}
@@ -244,11 +326,8 @@ const NewFormAdd = () => {
 
     )}
     
-    </div>
     
-
-    
-    
+    </div> 
   )
   
 }

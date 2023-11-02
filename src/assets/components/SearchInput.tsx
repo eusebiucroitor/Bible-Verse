@@ -13,9 +13,9 @@ const SearchInput: React.FC<SearchInputProps> = ({ searchQuery, onSearchChange, 
   };
   return (
     <>
-    <form onSubmit={handleSubmit} style={{width: '100%'}} >
+    <form onSubmit={handleSubmit} style={{width: '100%'}} id="formSearch" >
         
-        <InputGroup>
+        <InputGroup style={{marginTop: "2%"}}>
         <InputLeftElement children={<BsSearch /> }/>
         <Input
          borderRadius={20}
@@ -23,10 +23,11 @@ const SearchInput: React.FC<SearchInputProps> = ({ searchQuery, onSearchChange, 
           variant='filled' 
           type="text"
           value={searchQuery}
+          style={{width:'91%' }}
           onChange={(e) => onSearchChange(e.target.value)}
          
           />
-           <button type="submit" className='btn btn-primary'>Search</button> 
+           <button type="submit" className='btn btn-primary' style={{marginLeft:'2%'}}>Search</button> 
         </InputGroup>
         
     </form>  
