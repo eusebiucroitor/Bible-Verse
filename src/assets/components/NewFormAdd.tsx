@@ -136,7 +136,7 @@ const NewFormAdd = () => {
   const handleSearchSubmit = () => {
     // Filter the data based on the searchQuery
    
-    const filtered = savedData.filter((data) =>
+    const filtered = fetchedData.filter((data) =>
       data.bibleVers.toLowerCase().includes(searchQuery.toLowerCase()) ||
       data.bibleBook.toLowerCase().includes(searchQuery.toLowerCase()) ||
       data.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -154,14 +154,14 @@ const NewFormAdd = () => {
   };
   const [showSearchTable, setShowSearchTable] = useState<boolean>(false);
   const handleDeleteItem = (index: number) => {
-    const updatedData = [...savedData];
+    const updatedData = [...fetchedData];
     updatedData.splice(index, 1);
-    setSavedData(updatedData);
+    setFetchedData(updatedData);
     
   
     // Remove the deleted item from filteredData if it exists
     const filteredCopy = [...filteredData];
-    const deletedItem = filteredCopy.find((item) => savedData.indexOf(item) === index);
+    const deletedItem = filteredCopy.find((item) => fetchedData.indexOf(item) === index);
     if (deletedItem) {
       const deletedIndex = filteredCopy.indexOf(deletedItem);
       filteredCopy.splice(deletedIndex, 1);
@@ -281,7 +281,7 @@ const NewFormAdd = () => {
         )}
     {hideTable  && filteredData.length != 0  &&   (
         <div>
-          {savedData.length > 0? (
+          {fetchedData.length > 0 || savedData.length>0? (
             <div>
           <h2>Search Results</h2>
           
@@ -307,7 +307,7 @@ const NewFormAdd = () => {
                  <td>{data.verse}</td>
                  <td>{data.name}</td>
                  <td>
-                   <button onClick={() => handleDeleteItem(savedData.indexOf(data) )} className="btn btn-outline-danger" >Delete</button>
+                   <button onClick={() => handleDeleteItem(fetchedData.indexOf(data) )} className="btn btn-outline-danger" >Delete</button>
                  </td>
                </tr>
              
