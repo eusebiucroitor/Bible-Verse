@@ -244,10 +244,10 @@ const NewFormAdd = () => {
        {fetchedData.length > 0 ? (  
         <div>
         <h4>Bible Form</h4>   
-    <table   className="length">
+    <table   className="length" >
         <thead >
-          <tr>
-            <th>Bible Vers</th>
+          <tr  >
+            <th style={{paddingRight:"80px"}}>Bible Vers</th>
             <th>Bible Book</th>
             <th>Chapter</th>
             <th >Vers</th>
@@ -264,8 +264,8 @@ const NewFormAdd = () => {
               <td>{data.chapter}</td>
               <td>{data.verse}</td>
               <td>{data.name}</td>
-              <td>
-                <button onClick={() => handleDeleteClick(index)} className="btn btn-outline-danger">Delete</button>
+              <td style={{paddingRight:"14px"}}>
+                <button  onClick={() => handleDeleteClick(index)} className="btn btn-outline-danger">Delete</button>
               </td>
             </tr>
           ))}
@@ -310,8 +310,8 @@ const NewFormAdd = () => {
                  <td>{data.chapter}</td>
                  <td>{data.verse}</td>
                  <td>{data.name}</td>
-                 <td>
-                   <button onClick={() => handleDeleteItem(fetchedData.indexOf(data) )} className="btn btn-outline-danger" >Delete</button>
+                 <td style={{paddingRight:"12px"}}>
+                   <button  onClick={() => handleDeleteItem(fetchedData.indexOf(data) )} className="btn btn-outline-danger" >Delete</button>
                  </td>
                </tr>
              

@@ -15,7 +15,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ searchQuery, onSearchChange, 
     <>
     <form onSubmit={handleSubmit} style={{width: '100%'}} id="formSearch" >
         
-        <InputGroup style={{marginTop: "2%"}}>
+        <InputGroup style={{marginTop: "2%" ,paddingRight:"12px"}}>
         <InputLeftElement children={<BsSearch /> }/>
         <Input
          borderRadius={20}
